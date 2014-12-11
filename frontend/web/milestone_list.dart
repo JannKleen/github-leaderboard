@@ -30,7 +30,7 @@ class MilestoneList extends PolymerElement {
     spinner.active = true;
 
     // Fetch updated data
-    String url = "http://127.0.0.1:5000/update";
+    String url = "/update";
     var request = HttpRequest.getString(url).then(onDataLoaded);
 
     // Schedule next refresh
@@ -52,7 +52,7 @@ class MilestoneList extends PolymerElement {
         scores.add({'username': key,
                     'score': value});
       });
-      scores.sort((x, y) => x['score'].compareTo(y['score']));
+      scores.sort((x, y) => y['score'].compareTo(x['score']));
       this.score_groups_ordered.add(scores);
       this.score_groups_lookup.add(responseData['scores'][milestone]);
     }
