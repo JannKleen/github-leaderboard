@@ -6,6 +6,7 @@
 <link rel="import" href="packages/paper_elements/paper_spinner.html">
 <link rel="import" href="packages/core_elements/core_animated_pages.html">
 <link rel="import" href="packages/core_elements/core_animated_pages/transitions/hero_transition.html">
+<link rel="import" href="packages/core_elements/core_toolbar.html">
 
 <polymer-element name="milestone-list">
     <template>
@@ -107,7 +108,7 @@
                                         <h2 class="card_title">{{ score_groups_lookup[selected][user] }} | {{ user }}</h2>
                                         <template repeat="{{ issue in issue_group[user] }}">
                                             <paper-item>
-                                                <a href="{{ issue['url'] }}" target="_blank" layout horizontal center>
+                                                <a _href="{{ issue['url'] }}" target="_blank" layout horizontal center>
                                                     <div class="score">{{ issue['score'] }}</div>
                                                     <div class="title">{{ issue['title'] }}</div>
                                                 </a>
