@@ -1,0 +1,5 @@
+/frontend/.pub/
+/frontend/build/
+/frontend/packages/
+
+local_settings.py

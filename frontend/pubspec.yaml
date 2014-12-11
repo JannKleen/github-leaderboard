@@ -1,0 +1,12 @@
+name: frontend
+version: 0.0.1
+description: A Github leaderboard
+dependencies:
+  polymer: ">=0.15.1 <0.16.0"
+  paper_elements: any
+  core_elements: any
+transformers:
+- polymer:
+    entry_points: web/frontend.html
+dev_dependencies:
+#  unittest: any

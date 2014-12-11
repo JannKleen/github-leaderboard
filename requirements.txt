@@ -1,0 +1,5 @@
+flask==0.10.1
+github3.py==0.9.3
+peewee==2.4.4
+gunicorn
+

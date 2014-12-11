@@ -1,0 +1,126 @@
+<link rel="import" href="packages/polymer/polymer.html">
+<link rel="import" href="packages/paper_elements/paper_tabs.html">
+<link rel="import" href="packages/paper_elements/paper_tab.html">
+<link rel="import" href="packages/paper_elements/paper_shadow.html">
+<link rel="import" href="packages/paper_elements/paper_item.html">
+<link rel="import" href="packages/paper_elements/paper_spinner.html">
+<link rel="import" href="packages/core_elements/core_animated_pages.html">
+<link rel="import" href="packages/core_elements/core_animated_pages/transitions/hero_transition.html">
+
+<polymer-element name="milestone-list">
+    <template>
+        <style>
+            core-toolbar {
+                color: #f1f1f1;
+                fill: #f1f1f1;
+            }
+            core-animated-pages {
+                background: white;
+                display: inline-block;
+                width: 90%;
+                top: 20px;
+            }
+            paper-spinner.red::shadow .circle {
+                border-color: orangered;
+            }
+            div.score {
+                border-right: 1px solid;
+                margin-right: 10px;
+                padding-right: 10px;
+                font-size: 120%;
+            }
+            div.title {
+                font-size: 120%;
+            }
+            div.card {
+                padding: 20px;
+            }
+            h2.card_title {
+                padding-left: 40px;
+                padding-top: 25px;
+                margin-bottom: 10px;
+            }
+            paper-shadow {
+                background: white;
+            }
+            a {
+                text-decoration: none;
+                color: inherit;
+            }
+            #ranking_container {
+                min-width: 700px;
+            }
+            div.ranking_entry {
+                border-bottom: 1px solid darkgray;
+                padding:2% 5%;
+            }
+            div.ranking_header {
+                border-bottom: 3px solid darkgray;
+                padding:2% 5%;
+            }
+            div.ranking_name {
+                font-weight: bold;
+            }
+            div.ranking_score {
+                font-weight: bold;
+            }
+
+        </style>
+        <core-toolbar class="medium-tall" style="background: #4285f4;">
+            <paper-icon-button icon="menu"></paper-icon-button>
+            <span flex>Github Leaderboard</span>
+            <paper-spinner class="red"></paper-spinner>
+            <paper-icon-button icon="more-vert"></paper-icon-button>
+            <div class="bottom fit" horizontal layout>
+                <paper-tabs selected="{{ selected }}" flex style="max-width: 600px;">
+                    <template repeat="{{ milestone in milestones }}">
+                        <paper-tab id="{{ milestone }}" on-click="{{ select_milestone }}">{{ milestone }}</paper-tab>
+                    </template>
+                </paper-tabs>
+            </div>
+        </core-toolbar>
+
+        <div layout horizontal center-center>
+            <core-animated-pages selected="{{ selected }}" transitions="hero-transition">
+                <template repeat="{{ issue_group in issue_groups }}">
+                    <section>
+                        <div id="ranking_container" layout center>
+                            <paper-shadow z="4">
+                                <div class="ranking_header" horizontal layout>
+                                    <div class="ranking_name"> &nbsp; &nbsp; Name</div>
+                                    <div flex></div>
+                                    <div class="ranking_score">Score</div>
+                                </div>
+                                <template repeat="{{ entry in score_groups_ordered[selected] | enumerate }}">
+                                    <div class="ranking_entry" horizontal layout>
+                                        <div class="ranking_name">{{ entry.index + 1 }}. {{ entry.value['username'] }}</div>
+                                        <div flex></div>
+                                        <div class="ranking_score">{{ entry.value['score'] }}</div>
+                                    </div>
+                                </template>
+                            </paper-shadow>
+                        </div>
+                        <div horizontal around-justified layout >
+                            <template repeat="{{ user in issue_group.keys }}">
+                                <div class="card">
+                                    <paper-shadow z="3">
+                                        <h2 class="card_title">{{ score_groups_lookup[selected][user] }} | {{ user }}</h2>
+                                        <template repeat="{{ issue in issue_group[user] }}">
+                                            <paper-item>
+                                                <a href="{{ issue['url'] }}" target="_blank" layout horizontal center>
+                                                    <div class="score">{{ issue['score'] }}</div>
+                                                    <div class="title">{{ issue['title'] }}</div>
+                                                </a>
+                                            </paper-item>
+                                        </template>
+                                    </paper-shadow>
+                                </div>
+                            </template>
+                        </div>
+                    </section>
+                </template>
+            </core-animated-pages>
+        </div>
+    </template>
+    <script type="application/dart" src="milestone_list.dart"></script>
+</polymer-element>
