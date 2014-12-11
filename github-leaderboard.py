@@ -1,16 +1,16 @@
 # Python imports
-from itertools import groupby
+import os
 from collections import defaultdict
 import json
 
 # Contrib imports
 from flask import Flask, g
-from github3 import login, user
+from github3 import login
 
 # Local imports
 import settings
 
-app = Flask(__name__)
+app = Flask(__name__, static_folder='frontend/build/web/')
 
 
 def get_db():
@@ -28,8 +28,19 @@ def close_connection(exception):
 
 
 @app.route('/')
-def hello_world():
-    return 'Hello World!'
+def frontend_html():
+    return app.send_static_file('frontend.html')
+
+
+@app.route('/frontend.html_bootstrap.dart.js')
+def frontend_js():
+    return app.send_static_file('frontend.html_bootstrap.dart.js')
+
+
+@app.route('/packages/<path:path>')
+def static_proxy(path):
+    # send_static_file will guess the correct MIME type
+    return app.send_static_file(os.path.join('packages', path))
 
 
 @app.route('/update')
