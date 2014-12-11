@@ -51,8 +51,8 @@ def update_from_gh():
             scores.append(settings.label_scores.get(label, 0))
         return sum(scores)
 
-    gh = login(getattr(settings, 'GITHUB_USERNAME'), getattr(settings, 'GITHUB_TOKEN'))
-    repo = gh.repository(getattr(settings, 'GITHUB_REPO_OWNER'), getattr(settings, 'GITHUB_REPO_NAME'))
+    gh = login(settings.GITHUB_USERNAME, settings.GITHUB_TOKEN)
+    repo = gh.repository(settings.GITHUB_REPO_OWNER, settings.GITHUB_REPO_NAME)
     closed_issues = list(repo.iter_issues(state='closed'))
     closed_issues = filter(lambda issue: issue.milestone is not None, closed_issues)
     response = {
