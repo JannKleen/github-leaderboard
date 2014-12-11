@@ -12,7 +12,7 @@ except ImportError:
 
 def _get_config(key):
     # TODO nice error handling
-    return os.environ.get(key) if os.environ.get(key) is not None else getattr(local_settings, key) 
+    return os.environ.get(key) if os.environ.get(key) is not None else getattr(local_settings, key)
 
 # Database location
 DATABASE = 'leaderboard.db'
