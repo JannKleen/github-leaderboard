@@ -2,7 +2,6 @@ import 'package:polymer/polymer.dart';
 import 'dart:html';
 import 'dart:convert';
 import 'dart:async';
-import 'dart:collection';
 
 @CustomTag('milestone-list')
 class MilestoneList extends PolymerElement {
